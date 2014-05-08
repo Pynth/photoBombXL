@@ -33,11 +33,9 @@
             this.lblProfileName = new System.Windows.Forms.Label();
             this.txtProfileName = new System.Windows.Forms.TextBox();
             this.lblHeight = new System.Windows.Forms.Label();
-            this.lblWidth = new System.Windows.Forms.Label();
             this.lblFileType = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.txtHeight = new System.Windows.Forms.TextBox();
-            this.txtWidth = new System.Windows.Forms.TextBox();
             this.txtFileSize = new System.Windows.Forms.TextBox();
             this.lblExifMaintained = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -99,10 +97,10 @@
             // 
             // txtProfileName
             // 
-            this.txtProfileName.Location = new System.Drawing.Point(86, 26);
+            this.txtProfileName.Location = new System.Drawing.Point(118, 26);
             this.txtProfileName.Name = "txtProfileName";
             this.txtProfileName.ReadOnly = true;
-            this.txtProfileName.Size = new System.Drawing.Size(85, 20);
+            this.txtProfileName.Size = new System.Drawing.Size(75, 20);
             this.txtProfileName.TabIndex = 5;
             // 
             // lblHeight
@@ -110,18 +108,9 @@
             this.lblHeight.AutoSize = true;
             this.lblHeight.Location = new System.Drawing.Point(6, 52);
             this.lblHeight.Name = "lblHeight";
-            this.lblHeight.Size = new System.Drawing.Size(38, 13);
+            this.lblHeight.Size = new System.Drawing.Size(106, 13);
             this.lblHeight.TabIndex = 6;
-            this.lblHeight.Text = "Height";
-            // 
-            // lblWidth
-            // 
-            this.lblWidth.AutoSize = true;
-            this.lblWidth.Location = new System.Drawing.Point(6, 78);
-            this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(35, 13);
-            this.lblWidth.TabIndex = 7;
-            this.lblWidth.Text = "Width";
+            this.lblHeight.Text = "Size Of Longest Side";
             // 
             // lblFileType
             // 
@@ -143,26 +132,18 @@
             // 
             // txtHeight
             // 
-            this.txtHeight.Location = new System.Drawing.Point(87, 52);
+            this.txtHeight.Location = new System.Drawing.Point(118, 52);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.ReadOnly = true;
-            this.txtHeight.Size = new System.Drawing.Size(85, 20);
+            this.txtHeight.Size = new System.Drawing.Size(75, 20);
             this.txtHeight.TabIndex = 12;
-            // 
-            // txtWidth
-            // 
-            this.txtWidth.Location = new System.Drawing.Point(87, 78);
-            this.txtWidth.Name = "txtWidth";
-            this.txtWidth.ReadOnly = true;
-            this.txtWidth.Size = new System.Drawing.Size(85, 20);
-            this.txtWidth.TabIndex = 13;
             // 
             // txtFileSize
             // 
-            this.txtFileSize.Location = new System.Drawing.Point(87, 130);
+            this.txtFileSize.Location = new System.Drawing.Point(118, 131);
             this.txtFileSize.Name = "txtFileSize";
             this.txtFileSize.ReadOnly = true;
-            this.txtFileSize.Size = new System.Drawing.Size(85, 20);
+            this.txtFileSize.Size = new System.Drawing.Size(75, 20);
             this.txtFileSize.TabIndex = 15;
             // 
             // lblExifMaintained
@@ -236,12 +217,10 @@
             this.groupBox1.Controls.Add(this.lblProfileName);
             this.groupBox1.Controls.Add(this.txtProfileName);
             this.groupBox1.Controls.Add(this.lblHeight);
-            this.groupBox1.Controls.Add(this.lblWidth);
             this.groupBox1.Controls.Add(this.lblFileType);
             this.groupBox1.Controls.Add(this.lblSize);
             this.groupBox1.Controls.Add(this.txtHeight);
             this.groupBox1.Controls.Add(this.lblExifMaintained);
-            this.groupBox1.Controls.Add(this.txtWidth);
             this.groupBox1.Controls.Add(this.txtFileSize);
             this.groupBox1.Controls.Add(this.btnSaveProfile);
             this.groupBox1.Location = new System.Drawing.Point(548, 13);
@@ -277,9 +256,9 @@
             this.cmbFileSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFileSize.Enabled = false;
             this.cmbFileSize.FormattingEnabled = true;
-            this.cmbFileSize.Location = new System.Drawing.Point(178, 130);
+            this.cmbFileSize.Location = new System.Drawing.Point(212, 130);
             this.cmbFileSize.Name = "cmbFileSize";
-            this.cmbFileSize.Size = new System.Drawing.Size(85, 21);
+            this.cmbFileSize.Size = new System.Drawing.Size(75, 21);
             this.cmbFileSize.TabIndex = 35;
             // 
             // cmbExifMaintained
@@ -287,9 +266,9 @@
             this.cmbExifMaintained.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExifMaintained.Enabled = false;
             this.cmbExifMaintained.FormattingEnabled = true;
-            this.cmbExifMaintained.Location = new System.Drawing.Point(87, 156);
+            this.cmbExifMaintained.Location = new System.Drawing.Point(118, 156);
             this.cmbExifMaintained.Name = "cmbExifMaintained";
-            this.cmbExifMaintained.Size = new System.Drawing.Size(85, 21);
+            this.cmbExifMaintained.Size = new System.Drawing.Size(75, 21);
             this.cmbExifMaintained.TabIndex = 34;
             // 
             // cmbFileType
@@ -297,9 +276,9 @@
             this.cmbFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFileType.Enabled = false;
             this.cmbFileType.FormattingEnabled = true;
-            this.cmbFileType.Location = new System.Drawing.Point(87, 103);
+            this.cmbFileType.Location = new System.Drawing.Point(118, 103);
             this.cmbFileType.Name = "cmbFileType";
-            this.cmbFileType.Size = new System.Drawing.Size(85, 21);
+            this.cmbFileType.Size = new System.Drawing.Size(75, 21);
             this.cmbFileType.TabIndex = 20;
             // 
             // btnSaveProfile
@@ -457,11 +436,9 @@
         private System.Windows.Forms.Label lblProfileName;
         private System.Windows.Forms.TextBox txtProfileName;
         private System.Windows.Forms.Label lblHeight;
-        private System.Windows.Forms.Label lblWidth;
         private System.Windows.Forms.Label lblFileType;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.TextBox txtHeight;
-        private System.Windows.Forms.TextBox txtWidth;
         private System.Windows.Forms.TextBox txtFileSize;
         private System.Windows.Forms.Label lblExifMaintained;
         private System.Windows.Forms.Label label1;

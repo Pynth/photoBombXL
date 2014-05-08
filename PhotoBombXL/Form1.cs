@@ -200,7 +200,6 @@ namespace PhotoBombXL
         {
             txtProfileName.Text = "";
             txtHeight.Text = "";
-            txtWidth.Text = "";
             txtFileSize.Text = "";
             cmbExifMaintained.Text = "";
             cmbFileSize.Text = "";
@@ -211,7 +210,6 @@ namespace PhotoBombXL
         {
             txtProfileName.ReadOnly = false;
             txtHeight.ReadOnly = false;
-            txtWidth.ReadOnly = false;
             txtFileSize.ReadOnly = false;
             cmbExifMaintained.Enabled = true;
             cmbFileSize.Enabled = true;
@@ -222,7 +220,6 @@ namespace PhotoBombXL
         {
             txtProfileName.ReadOnly = true;
             txtHeight.ReadOnly = true;
-            txtWidth.ReadOnly = true;
             txtFileSize.ReadOnly = true;
             cmbExifMaintained.Enabled = false;
             cmbFileSize.Enabled = false;
@@ -253,7 +250,6 @@ namespace PhotoBombXL
             }
             txtProfileName.Text = ((Profile)lstProfile.SelectedItem).name;
             txtHeight.Text = ((Profile)lstProfile.SelectedItem).heightInPixels.ToString();
-            txtWidth.Text = ((Profile)lstProfile.SelectedItem).widthInPixels.ToString();
             cmbFileType.Text = ((Profile)lstProfile.SelectedItem).fileType.ToString();
             txtFileSize.Text = ((Profile)lstProfile.SelectedItem).fileSize.ToString();
             cmbFileSize.Text = ((Profile)lstProfile.SelectedItem).indicator.ToString();
@@ -334,7 +330,7 @@ namespace PhotoBombXL
 
             try
             {
-                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), Convert.ToInt32(txtWidth.Text), fileType, Convert.ToInt32(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
+                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), 1, fileType, Convert.ToInt32(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
             }
             catch (Exception)
             {
