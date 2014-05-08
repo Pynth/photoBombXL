@@ -445,7 +445,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(869, 479);
             this.Name = "Form1";
-            this.Text = "Photo Bomber XL";
+            this.Text = "PhotoBombXL";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctrPreviewImage)).EndInit();
