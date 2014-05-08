@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-// 
+
 //      this is where the profiles are saved on my comp in a txt file
 //      C:\Users\Garrett Kliewer\AppData\Roaming\Microsoft\PhotoBombXL\1.0.0.0
 
@@ -150,7 +150,7 @@ namespace PhotoBombXL
             {
             }
 
-            // poputlate the list box with files
+            // populate the list box with files
             foreach (string file in files)
             {
                 // display only image files
@@ -270,6 +270,7 @@ namespace PhotoBombXL
 
             SortList();
             SelectTop();
+            saveProfilesToFile();
         }
 
         private void btnBrowseSelect_Click(object sender, EventArgs e)
@@ -341,6 +342,8 @@ namespace PhotoBombXL
             if (isCreating == false) lstProfile.Items.Remove(lstProfile.SelectedItem);
             lstProfile.Items.Add(p);
             btnCancelProfile_Click(sender, e);
+
+            saveProfilesToFile();
         }
 
         private void btnCancelProfile_Click(object sender, EventArgs e)
@@ -393,6 +396,18 @@ namespace PhotoBombXL
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
+            if (chklstFiles.Items.Count == 0)
+            {
+                MessageBox.Show("No images to convert", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtSaveDirectory.Text == "")
+            {
+                MessageBox.Show("Since no directory was selected, a default directory will be used.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                chkDefaultSave.Checked = true;
+            }
+
             ConverterUtil.convertFiles(chklstFiles.CheckedItems.Cast<ImageFilePathUtil>().ToList(), (Profile)lstProfile.SelectedItem, txtSaveDirectory.Text, prgProgressBar);
             MessageBox.Show("Conversion Complete");
             prgProgressBar.Value = 0;
@@ -403,6 +418,22 @@ namespace PhotoBombXL
             chkDefaultSave_CheckedChanged(sender, e);
 
             populateListboxWithImageFiles();
+        }
+
+        private void cmbFileType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                txtFileSize.Text = "";
+            if ((Profile.fileTypes)cmbFileType.SelectedValue == Profile.fileTypes.JPG)
+            {
+                txtFileSize.Enabled = true;
+                cmbFileSize.Enabled = true;
+            }
+            else
+            {
+                txtFileSize.Text = "";
+                cmbFileSize.Enabled = false;
+                txtFileSize.Enabled = false;
+            }
         }
     }
 }
