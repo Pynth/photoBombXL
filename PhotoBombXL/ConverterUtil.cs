@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace PhotoBombXL
 {
@@ -28,8 +29,11 @@ namespace PhotoBombXL
                     System.IO.Directory.CreateDirectory(destinationPath + "\\" + profileFolder);
 
                     // resizing the image
-
-                    Size adjustedSize = getCorrectSize(image.Size, usedProfile);
+                    Size adjustedSize = image.Size;
+                    if (image.Size.Height > usedProfile.heightInPixels || image.Size.Width > usedProfile.heightInPixels)
+                    {
+                        adjustedSize = getCorrectSize(image.Size, usedProfile);
+                    }
 
                     Size newSize = new Size(usedProfile.widthInPixels == -1 ? image.Width : adjustedSize.Width, usedProfile.heightInPixels == -1 ? image.Height : adjustedSize.Height);
                     image = resizeImage(image, newSize);
@@ -41,6 +45,9 @@ namespace PhotoBombXL
                     }
                     else if (usedProfile.fileType == Profile.fileTypes.JPG)
                     {
+                        JPEGQuality qualityChanger = new JPEGQuality();
+                        //long saveQuality = qualityChanger.sizeToQuality(image, usedProfile.fileSize, 0, 100);
+
                         image.Save(extentionlessFilePath + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
                     else if (usedProfile.fileType == Profile.fileTypes.PNG)
@@ -86,13 +93,16 @@ namespace PhotoBombXL
 
         public static Size getCorrectSize(Size currentSize, Profile profile)
         {
+            double ratio;
             if (currentSize.Height >= currentSize.Width)
             {
-                return new Size((int)(currentSize.Width / ((double)currentSize.Height / currentSize.Width)), profile.heightInPixels);
+                ratio = profile.heightInPixels / (double)currentSize.Height;
+                return new Size((int)((double)currentSize.Width * ratio), profile.heightInPixels);
             }
             else
             {
-                return new Size(profile.heightInPixels, (int)(currentSize.Height * ((double)currentSize.Height / currentSize.Width)));
+                ratio = profile.heightInPixels / (double)currentSize.Width;
+                return new Size(profile.heightInPixels, (int)((double)currentSize.Height * ratio));
             }
         }
     }

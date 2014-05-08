@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lstProfile = new System.Windows.Forms.ListBox();
             this.btnCreateProfile = new System.Windows.Forms.Button();
             this.lblProfileName = new System.Windows.Forms.Label();
@@ -441,6 +442,7 @@
             this.Controls.Add(this.txtSelectDirectory);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstProfile);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(869, 479);
             this.Name = "Form1";
             this.Text = "Photo Bomber XL";
