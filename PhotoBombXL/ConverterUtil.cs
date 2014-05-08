@@ -86,13 +86,16 @@ namespace PhotoBombXL
 
         public static Size getCorrectSize(Size currentSize, Profile profile)
         {
+            double ratio;
             if (currentSize.Height >= currentSize.Width)
             {
-                return new Size((int)(currentSize.Width / ((double)currentSize.Height / currentSize.Width)), profile.heightInPixels);
+                ratio = profile.heightInPixels / (double)currentSize.Height;
+                return new Size((int)((double)currentSize.Width * ratio), profile.heightInPixels);
             }
             else
             {
-                return new Size(profile.heightInPixels, (int)(currentSize.Height * ((double)currentSize.Height / currentSize.Width)));
+                ratio = profile.heightInPixels / (double)currentSize.Width;
+                return new Size(profile.heightInPixels, (int)((double)currentSize.Height * ratio));
             }
         }
     }
