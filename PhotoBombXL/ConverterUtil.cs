@@ -46,7 +46,7 @@ namespace PhotoBombXL
                     else if (usedProfile.fileType == Profile.fileTypes.JPG)
                     {
                         JPEGQuality qualityChanger = new JPEGQuality();
-                        long saveQuality = qualityChanger.sizeToQuality(image, usedProfile.fileSize, 0, 100);
+                        //long saveQuality = qualityChanger.sizeToQuality(image, usedProfile.fileSize, 0, 100);
 
                         image.Save(extentionlessFilePath + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
