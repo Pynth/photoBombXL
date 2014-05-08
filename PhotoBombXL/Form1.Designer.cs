@@ -36,13 +36,9 @@
             this.lblWidth = new System.Windows.Forms.Label();
             this.lblFileType = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
-            this.lblAspectHeight = new System.Windows.Forms.Label();
-            this.lblAspectWidth = new System.Windows.Forms.Label();
             this.txtHeight = new System.Windows.Forms.TextBox();
             this.txtWidth = new System.Windows.Forms.TextBox();
             this.txtFileSize = new System.Windows.Forms.TextBox();
-            this.txtAspectHeight = new System.Windows.Forms.TextBox();
-            this.txtAspectWidth = new System.Windows.Forms.TextBox();
             this.lblExifMaintained = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSelectDirectory = new System.Windows.Forms.TextBox();
@@ -84,7 +80,7 @@
             // 
             // btnCreateProfile
             // 
-            this.btnCreateProfile.Location = new System.Drawing.Point(6, 234);
+            this.btnCreateProfile.Location = new System.Drawing.Point(7, 185);
             this.btnCreateProfile.Name = "btnCreateProfile";
             this.btnCreateProfile.Size = new System.Drawing.Size(103, 23);
             this.btnCreateProfile.TabIndex = 3;
@@ -145,24 +141,6 @@
             this.lblSize.TabIndex = 9;
             this.lblSize.Text = "File Size";
             // 
-            // lblAspectHeight
-            // 
-            this.lblAspectHeight.AutoSize = true;
-            this.lblAspectHeight.Location = new System.Drawing.Point(6, 156);
-            this.lblAspectHeight.Name = "lblAspectHeight";
-            this.lblAspectHeight.Size = new System.Drawing.Size(74, 13);
-            this.lblAspectHeight.TabIndex = 10;
-            this.lblAspectHeight.Text = "Aspect Height";
-            // 
-            // lblAspectWidth
-            // 
-            this.lblAspectWidth.AutoSize = true;
-            this.lblAspectWidth.Location = new System.Drawing.Point(6, 182);
-            this.lblAspectWidth.Name = "lblAspectWidth";
-            this.lblAspectWidth.Size = new System.Drawing.Size(71, 13);
-            this.lblAspectWidth.TabIndex = 11;
-            this.lblAspectWidth.Text = "Aspect Width";
-            // 
             // txtHeight
             // 
             this.txtHeight.Location = new System.Drawing.Point(87, 52);
@@ -187,26 +165,10 @@
             this.txtFileSize.Size = new System.Drawing.Size(85, 20);
             this.txtFileSize.TabIndex = 15;
             // 
-            // txtAspectHeight
-            // 
-            this.txtAspectHeight.Location = new System.Drawing.Point(87, 156);
-            this.txtAspectHeight.Name = "txtAspectHeight";
-            this.txtAspectHeight.ReadOnly = true;
-            this.txtAspectHeight.Size = new System.Drawing.Size(85, 20);
-            this.txtAspectHeight.TabIndex = 16;
-            // 
-            // txtAspectWidth
-            // 
-            this.txtAspectWidth.Location = new System.Drawing.Point(87, 182);
-            this.txtAspectWidth.Name = "txtAspectWidth";
-            this.txtAspectWidth.ReadOnly = true;
-            this.txtAspectWidth.Size = new System.Drawing.Size(85, 20);
-            this.txtAspectWidth.TabIndex = 17;
-            // 
             // lblExifMaintained
             // 
             this.lblExifMaintained.AutoSize = true;
-            this.lblExifMaintained.Location = new System.Drawing.Point(6, 208);
+            this.lblExifMaintained.Location = new System.Drawing.Point(7, 159);
             this.lblExifMaintained.Name = "lblExifMaintained";
             this.lblExifMaintained.Size = new System.Drawing.Size(76, 13);
             this.lblExifMaintained.TabIndex = 18;
@@ -277,25 +239,21 @@
             this.groupBox1.Controls.Add(this.lblWidth);
             this.groupBox1.Controls.Add(this.lblFileType);
             this.groupBox1.Controls.Add(this.lblSize);
-            this.groupBox1.Controls.Add(this.lblAspectHeight);
-            this.groupBox1.Controls.Add(this.lblAspectWidth);
             this.groupBox1.Controls.Add(this.txtHeight);
             this.groupBox1.Controls.Add(this.lblExifMaintained);
             this.groupBox1.Controls.Add(this.txtWidth);
-            this.groupBox1.Controls.Add(this.txtAspectWidth);
-            this.groupBox1.Controls.Add(this.txtAspectHeight);
             this.groupBox1.Controls.Add(this.txtFileSize);
             this.groupBox1.Controls.Add(this.btnSaveProfile);
             this.groupBox1.Location = new System.Drawing.Point(548, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(293, 265);
+            this.groupBox1.Size = new System.Drawing.Size(293, 216);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile Information";
             // 
             // btnEditProfile
             // 
-            this.btnEditProfile.Location = new System.Drawing.Point(131, 234);
+            this.btnEditProfile.Location = new System.Drawing.Point(132, 185);
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.Size = new System.Drawing.Size(103, 23);
             this.btnEditProfile.TabIndex = 38;
@@ -305,7 +263,7 @@
             // 
             // btnCancelProfile
             // 
-            this.btnCancelProfile.Location = new System.Drawing.Point(131, 234);
+            this.btnCancelProfile.Location = new System.Drawing.Point(132, 185);
             this.btnCancelProfile.Name = "btnCancelProfile";
             this.btnCancelProfile.Size = new System.Drawing.Size(103, 23);
             this.btnCancelProfile.TabIndex = 37;
@@ -329,7 +287,7 @@
             this.cmbExifMaintained.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExifMaintained.Enabled = false;
             this.cmbExifMaintained.FormattingEnabled = true;
-            this.cmbExifMaintained.Location = new System.Drawing.Point(86, 205);
+            this.cmbExifMaintained.Location = new System.Drawing.Point(87, 156);
             this.cmbExifMaintained.Name = "cmbExifMaintained";
             this.cmbExifMaintained.Size = new System.Drawing.Size(85, 21);
             this.cmbExifMaintained.TabIndex = 34;
@@ -346,7 +304,7 @@
             // 
             // btnSaveProfile
             // 
-            this.btnSaveProfile.Location = new System.Drawing.Point(6, 234);
+            this.btnSaveProfile.Location = new System.Drawing.Point(7, 185);
             this.btnSaveProfile.Name = "btnSaveProfile";
             this.btnSaveProfile.Size = new System.Drawing.Size(103, 23);
             this.btnSaveProfile.TabIndex = 36;
@@ -502,13 +460,9 @@
         private System.Windows.Forms.Label lblWidth;
         private System.Windows.Forms.Label lblFileType;
         private System.Windows.Forms.Label lblSize;
-        private System.Windows.Forms.Label lblAspectHeight;
-        private System.Windows.Forms.Label lblAspectWidth;
         private System.Windows.Forms.TextBox txtHeight;
         private System.Windows.Forms.TextBox txtWidth;
         private System.Windows.Forms.TextBox txtFileSize;
-        private System.Windows.Forms.TextBox txtAspectHeight;
-        private System.Windows.Forms.TextBox txtAspectWidth;
         private System.Windows.Forms.Label lblExifMaintained;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSelectDirectory;

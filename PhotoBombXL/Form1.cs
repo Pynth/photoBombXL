@@ -184,6 +184,9 @@ namespace PhotoBombXL
 
         private void btnCreateProfile_Click(object sender, EventArgs e)
         {
+            btnDeleteProfile.Enabled = false;
+            lstProfile.Enabled = false;
+            btnConvert.Enabled = false;
             isCreating = true;
             ClearProfile();
             EnableProfile();
@@ -199,8 +202,6 @@ namespace PhotoBombXL
             txtHeight.Text = "";
             txtWidth.Text = "";
             txtFileSize.Text = "";
-            txtAspectHeight.Text = "";
-            txtAspectWidth.Text = "";
             cmbExifMaintained.Text = "";
             cmbFileSize.Text = "";
             cmbFileType.Text = "mb";
@@ -212,8 +213,6 @@ namespace PhotoBombXL
             txtHeight.ReadOnly = false;
             txtWidth.ReadOnly = false;
             txtFileSize.ReadOnly = false;
-            txtAspectHeight.ReadOnly = false;
-            txtAspectWidth.ReadOnly = false;
             cmbExifMaintained.Enabled = true;
             cmbFileSize.Enabled = true;
             cmbFileType.Enabled = true;
@@ -225,8 +224,6 @@ namespace PhotoBombXL
             txtHeight.ReadOnly = true;
             txtWidth.ReadOnly = true;
             txtFileSize.ReadOnly = true;
-            txtAspectHeight.ReadOnly = true;
-            txtAspectWidth.ReadOnly = true;
             cmbExifMaintained.Enabled = false;
             cmbFileSize.Enabled = false;
             cmbFileType.Enabled = false;
@@ -260,8 +257,6 @@ namespace PhotoBombXL
             cmbFileType.Text = ((Profile)lstProfile.SelectedItem).fileType.ToString();
             txtFileSize.Text = ((Profile)lstProfile.SelectedItem).fileSize.ToString();
             cmbFileSize.Text = ((Profile)lstProfile.SelectedItem).indicator.ToString();
-            txtAspectHeight.Text = ((Profile)lstProfile.SelectedItem).aspectHeight.ToString();
-            txtAspectWidth.Text = ((Profile)lstProfile.SelectedItem).aspectWidth.ToString();
             cmbExifMaintained.Text = ((Profile)lstProfile.SelectedItem).isExifMaintained == true ? "Yes" : "No";
         }
 
@@ -326,6 +321,9 @@ namespace PhotoBombXL
 
         private void btnSaveProfile_Click(object sender, EventArgs e)
         {
+            btnConvert.Enabled = true;
+            btnDeleteProfile.Enabled = true;
+            lstProfile.Enabled = true;
             Profile.fileTypes fileType = (Profile.fileTypes)Enum.Parse(typeof(Profile.fileTypes), cmbFileType.Text);
             Profile.exifMaintained exifMaintained = (Profile.exifMaintained)Enum.Parse(typeof(Profile.exifMaintained), cmbExifMaintained.Text);
             Profile.fileSizeIndicator indicator = (Profile.fileSizeIndicator)Enum.Parse(typeof(Profile.fileSizeIndicator), cmbFileSize.Text);
@@ -336,11 +334,11 @@ namespace PhotoBombXL
 
             try
             {
-                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), Convert.ToInt32(txtWidth.Text), fileType, Convert.ToInt32(txtFileSize.Text), indicator, Convert.ToInt32(txtAspectHeight.Text), Convert.ToInt32(txtAspectWidth.Text), isExifMaintained);
+                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), Convert.ToInt32(txtWidth.Text), fileType, Convert.ToInt32(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
             }
             catch (Exception)
             {
-                MessageBox.Show("Profile cannot be created.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A field is currently invalid. The profile has not been created.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -351,6 +349,9 @@ namespace PhotoBombXL
 
         private void btnCancelProfile_Click(object sender, EventArgs e)
         {
+            btnConvert.Enabled = true;
+            btnDeleteProfile.Enabled = true;
+            lstProfile.Enabled = true;
             DisableProfile();
             btnCreateProfile.Visible = true;
             btnEditProfile.Visible = true;
@@ -383,6 +384,9 @@ namespace PhotoBombXL
 
         private void btnEditProfile_Click(object sender, EventArgs e)
         {
+            btnConvert.Enabled = false;
+            lstProfile.Enabled = false;
+            btnDeleteProfile.Enabled = false;
             isCreating = false;
             EnableProfile();
             btnCreateProfile.Visible = false;
