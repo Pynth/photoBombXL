@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-// 
+
 //      this is where the profiles are saved on my comp in a txt file
 //      C:\Users\Garrett Kliewer\AppData\Roaming\Microsoft\PhotoBombXL\1.0.0.0
 
@@ -150,7 +150,7 @@ namespace PhotoBombXL
             {
             }
 
-            // poputlate the list box with files
+            // populate the list box with files
             foreach (string file in files)
             {
                 // display only image files
