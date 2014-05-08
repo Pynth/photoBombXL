@@ -78,7 +78,7 @@
             // 
             // btnCreateProfile
             // 
-            this.btnCreateProfile.Location = new System.Drawing.Point(7, 185);
+            this.btnCreateProfile.Location = new System.Drawing.Point(7, 160);
             this.btnCreateProfile.Name = "btnCreateProfile";
             this.btnCreateProfile.Size = new System.Drawing.Size(103, 23);
             this.btnCreateProfile.TabIndex = 3;
@@ -115,7 +115,7 @@
             // lblFileType
             // 
             this.lblFileType.AutoSize = true;
-            this.lblFileType.Location = new System.Drawing.Point(6, 104);
+            this.lblFileType.Location = new System.Drawing.Point(6, 79);
             this.lblFileType.Name = "lblFileType";
             this.lblFileType.Size = new System.Drawing.Size(50, 13);
             this.lblFileType.TabIndex = 8;
@@ -124,7 +124,7 @@
             // lblSize
             // 
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(6, 130);
+            this.lblSize.Location = new System.Drawing.Point(6, 105);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(46, 13);
             this.lblSize.TabIndex = 9;
@@ -140,7 +140,7 @@
             // 
             // txtFileSize
             // 
-            this.txtFileSize.Location = new System.Drawing.Point(118, 131);
+            this.txtFileSize.Location = new System.Drawing.Point(118, 106);
             this.txtFileSize.Name = "txtFileSize";
             this.txtFileSize.ReadOnly = true;
             this.txtFileSize.Size = new System.Drawing.Size(75, 20);
@@ -149,7 +149,7 @@
             // lblExifMaintained
             // 
             this.lblExifMaintained.AutoSize = true;
-            this.lblExifMaintained.Location = new System.Drawing.Point(7, 159);
+            this.lblExifMaintained.Location = new System.Drawing.Point(7, 134);
             this.lblExifMaintained.Name = "lblExifMaintained";
             this.lblExifMaintained.Size = new System.Drawing.Size(76, 13);
             this.lblExifMaintained.TabIndex = 18;
@@ -225,14 +225,14 @@
             this.groupBox1.Controls.Add(this.btnSaveProfile);
             this.groupBox1.Location = new System.Drawing.Point(548, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(293, 216);
+            this.groupBox1.Size = new System.Drawing.Size(293, 195);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile Information";
             // 
             // btnEditProfile
             // 
-            this.btnEditProfile.Location = new System.Drawing.Point(132, 185);
+            this.btnEditProfile.Location = new System.Drawing.Point(132, 160);
             this.btnEditProfile.Name = "btnEditProfile";
             this.btnEditProfile.Size = new System.Drawing.Size(103, 23);
             this.btnEditProfile.TabIndex = 38;
@@ -242,7 +242,7 @@
             // 
             // btnCancelProfile
             // 
-            this.btnCancelProfile.Location = new System.Drawing.Point(132, 185);
+            this.btnCancelProfile.Location = new System.Drawing.Point(132, 160);
             this.btnCancelProfile.Name = "btnCancelProfile";
             this.btnCancelProfile.Size = new System.Drawing.Size(103, 23);
             this.btnCancelProfile.TabIndex = 37;
@@ -256,7 +256,7 @@
             this.cmbFileSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFileSize.Enabled = false;
             this.cmbFileSize.FormattingEnabled = true;
-            this.cmbFileSize.Location = new System.Drawing.Point(212, 130);
+            this.cmbFileSize.Location = new System.Drawing.Point(212, 105);
             this.cmbFileSize.Name = "cmbFileSize";
             this.cmbFileSize.Size = new System.Drawing.Size(75, 21);
             this.cmbFileSize.TabIndex = 35;
@@ -266,7 +266,7 @@
             this.cmbExifMaintained.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExifMaintained.Enabled = false;
             this.cmbExifMaintained.FormattingEnabled = true;
-            this.cmbExifMaintained.Location = new System.Drawing.Point(118, 156);
+            this.cmbExifMaintained.Location = new System.Drawing.Point(118, 131);
             this.cmbExifMaintained.Name = "cmbExifMaintained";
             this.cmbExifMaintained.Size = new System.Drawing.Size(75, 21);
             this.cmbExifMaintained.TabIndex = 34;
@@ -276,7 +276,7 @@
             this.cmbFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFileType.Enabled = false;
             this.cmbFileType.FormattingEnabled = true;
-            this.cmbFileType.Location = new System.Drawing.Point(118, 103);
+            this.cmbFileType.Location = new System.Drawing.Point(118, 78);
             this.cmbFileType.Name = "cmbFileType";
             this.cmbFileType.Size = new System.Drawing.Size(75, 21);
             this.cmbFileType.TabIndex = 20;
@@ -284,7 +284,7 @@
             // 
             // btnSaveProfile
             // 
-            this.btnSaveProfile.Location = new System.Drawing.Point(7, 185);
+            this.btnSaveProfile.Location = new System.Drawing.Point(7, 160);
             this.btnSaveProfile.Name = "btnSaveProfile";
             this.btnSaveProfile.Size = new System.Drawing.Size(103, 23);
             this.btnSaveProfile.TabIndex = 36;
