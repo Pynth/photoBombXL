@@ -7,7 +7,7 @@ using System.Text;
 namespace PhotoBombXL
 {
     class ImageFilePathUtil
-    {
+    {// asd
         public string fullPath { get; set; }
         public string fileName { get; set; }
         public string extension { get; set; }
