@@ -210,9 +210,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(274, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 23;
-            this.label2.Text = "Selected Directory";
+            this.label2.Text = "Saved Profiles";
             // 
             // label3
             // 
