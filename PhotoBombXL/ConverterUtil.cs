@@ -4,41 +4,56 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace PhotoBombXL
 {
     class ConverterUtil
     {
-        public static void convertFiles(List<ImageFilePathUtil> filesToBeConverted, Profile.fileTypes whichTypeOfFileToConvertTo, string destinationPath)
+        public static void convertFiles(List<ImageFilePathUtil> filesToBeConverted, Profile usedProfile, string destinationPath, ProgressBar progressBar)
         {
+            progressBar.Minimum = 0;
+            progressBar.Maximum = filesToBeConverted.Count;
+            progressBar.Step = 1;
+            progressBar.Value = 0;
+
+            string profileFolder = usedProfile.name;
             foreach (ImageFilePathUtil file in filesToBeConverted)
             {
                 // check to make sure we are using a valid file
                 if (isFilePathValid(file.fullPath))
                 {
+                    string extentionlessFilePath = destinationPath + "\\" + profileFolder + "\\" + file.nameWithoutExtension;
                     Image image = Image.FromFile(file.fullPath);
+                    System.IO.Directory.CreateDirectory(destinationPath + "\\" + profileFolder);
+
+                    // resizing the image
+                    Size newSize = new Size(usedProfile.widthInPixels ==  -1 ? image.Width : usedProfile.widthInPixels, usedProfile.heightInPixels == -1 ? image.Width : usedProfile.heightInPixels);
+                    image = resizeImage(image, newSize);
 
                     // choose which kind of file to convert the image to
-                    if (whichTypeOfFileToConvertTo == Profile.fileTypes.GIF)
+                    if (usedProfile.fileType == Profile.fileTypes.GIF)
                     {
-                        image.Save(destinationPath + "\\" + file.nameWithoutExtension + ".gif", System.Drawing.Imaging.ImageFormat.Gif);
+                        image.Save(extentionlessFilePath + ".gif", System.Drawing.Imaging.ImageFormat.Gif);
                     }
-                    else if (whichTypeOfFileToConvertTo == Profile.fileTypes.JPG)
+                    else if (usedProfile.fileType == Profile.fileTypes.JPG)
                     {
-                        image.Save(destinationPath + "\\" + file.nameWithoutExtension + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                        image.Save(extentionlessFilePath + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
-                    else if (whichTypeOfFileToConvertTo == Profile.fileTypes.PNG)
+                    else if (usedProfile.fileType == Profile.fileTypes.PNG)
                     {
-                        image.Save(destinationPath + "\\" + file.nameWithoutExtension + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                        image.Save(extentionlessFilePath + ".png", System.Drawing.Imaging.ImageFormat.Png);
                     }
-                    else if (whichTypeOfFileToConvertTo == Profile.fileTypes.TIFF)
+                    else if (usedProfile.fileType == Profile.fileTypes.TIFF)
                     {
-                        image.Save(destinationPath + "\\" + file.nameWithoutExtension + ".tiff", System.Drawing.Imaging.ImageFormat.Tiff);
+                        image.Save(extentionlessFilePath + ".tiff", System.Drawing.Imaging.ImageFormat.Tiff);
                     }
-                    else if (whichTypeOfFileToConvertTo == Profile.fileTypes.BMP)
+                    else if (usedProfile.fileType == Profile.fileTypes.BMP)
                     {
-                        image.Save(destinationPath + "\\" + file.nameWithoutExtension + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+                        image.Save(extentionlessFilePath + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
                     }
+                    progressBar.PerformStep();
                 }
             }
         }
@@ -60,6 +75,11 @@ namespace PhotoBombXL
                 return true;
             }
             return false;
+        }
+        // used for resizing an image
+        public static Image resizeImage(Image imageToResize, Size size)
+        {
+            return (Image)(new Bitmap(imageToResize, size));
         }
     }
 }
