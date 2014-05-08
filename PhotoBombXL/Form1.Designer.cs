@@ -301,6 +301,7 @@
             this.cmbFileType.Name = "cmbFileType";
             this.cmbFileType.Size = new System.Drawing.Size(85, 21);
             this.cmbFileType.TabIndex = 20;
+            this.cmbFileType.SelectedIndexChanged += new System.EventHandler(this.cmbFileType_SelectedIndexChanged);
             // 
             // btnSaveProfile
             // 
