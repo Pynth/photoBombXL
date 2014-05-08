@@ -60,6 +60,8 @@
             this.btnUncheckAll = new System.Windows.Forms.Button();
             this.chklstFiles = new System.Windows.Forms.CheckedListBox();
             this.btnConvert = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctrPreviewImage)).BeginInit();
             this.SuspendLayout();
@@ -397,11 +399,31 @@
             this.btnConvert.Text = "GoGo";
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(441, 345);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(81, 23);
+            this.btnImport.TabIndex = 38;
+            this.btnImport.Text = "Import Profiles";
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(441, 374);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(82, 23);
+            this.btnExport.TabIndex = 39;
+            this.btnExport.Text = "Export Profiles";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 441);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.chklstFiles);
             this.Controls.Add(this.btnUncheckAll);
@@ -464,6 +486,8 @@
         private System.Windows.Forms.Button btnSaveProfile;
         private System.Windows.Forms.Button btnEditProfile;
         private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 
