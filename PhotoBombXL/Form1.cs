@@ -329,6 +329,9 @@ namespace PhotoBombXL
 
             Profile p;
 
+            if (txtHeight.Text == "") txtHeight.Text = "-1";
+            if (txtFileSize.Text == "") txtFileSize.Text = "-1";
+
             try
             {
                 p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), 1, fileType, Convert.ToInt32(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
