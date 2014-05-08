@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace PhotoBombXL
 {
@@ -29,7 +28,10 @@ namespace PhotoBombXL
                     System.IO.Directory.CreateDirectory(destinationPath + "\\" + profileFolder);
 
                     // resizing the image
-                    Size newSize = new Size(usedProfile.widthInPixels ==  -1 ? image.Width : usedProfile.widthInPixels, usedProfile.heightInPixels == -1 ? image.Width : usedProfile.heightInPixels);
+
+                    Size adjustedSize = getCorrectSize(image.Size, usedProfile);
+
+                    Size newSize = new Size(usedProfile.widthInPixels == -1 ? image.Width : adjustedSize.Width, usedProfile.heightInPixels == -1 ? image.Height : adjustedSize.Height);
                     image = resizeImage(image, newSize);
 
                     // choose which kind of file to convert the image to
@@ -80,6 +82,18 @@ namespace PhotoBombXL
         public static Image resizeImage(Image imageToResize, Size size)
         {
             return (Image)(new Bitmap(imageToResize, size));
+        }
+
+        public static Size getCorrectSize(Size currentSize, Profile profile)
+        {
+            if (currentSize.Height >= currentSize.Width)
+            {
+                return new Size((int)(currentSize.Width / ((double)currentSize.Height / currentSize.Width)), profile.heightInPixels);
+            }
+            else
+            {
+                return new Size(profile.heightInPixels, (int)(currentSize.Height * ((double)currentSize.Height / currentSize.Width)));
+            }
         }
     }
 }
