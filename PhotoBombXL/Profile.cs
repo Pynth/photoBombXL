@@ -10,7 +10,6 @@ namespace PhotoBombXL
         public enum fileTypes
         {
             JPG,
-            RAW,
             GIF,
             PNG,
             BMP,
