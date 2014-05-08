@@ -274,6 +274,7 @@ namespace PhotoBombXL
 
             SortList();
             SelectTop();
+            saveProfilesToFile();
         }
 
         private void btnBrowseSelect_Click(object sender, EventArgs e)
@@ -345,6 +346,8 @@ namespace PhotoBombXL
             if (isCreating == false) lstProfile.Items.Remove(lstProfile.SelectedItem);
             lstProfile.Items.Add(p);
             btnCancelProfile_Click(sender, e);
+
+            saveProfilesToFile();
         }
 
         private void btnCancelProfile_Click(object sender, EventArgs e)
