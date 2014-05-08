@@ -7,14 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-<<<<<<< HEAD
-// testing commit...
-=======
 
 //      this is where the profiles are saved on my comp in a txt file
 //      C:\Users\Garrett Kliewer\AppData\Roaming\Microsoft\PhotoBombXL\1.0.0.0
 
->>>>>>> f8aba955462676b149de52eecf12ba18d49825b2
+// f8aba955462676b149de52eecf12ba18d49825b2
 namespace PhotoBombXL
 {
     public partial class Form1 : Form
