@@ -61,6 +61,8 @@
             this.btnUncheckAll = new System.Windows.Forms.Button();
             this.chklstFiles = new System.Windows.Forms.CheckedListBox();
             this.btnConvert = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctrPreviewImage)).BeginInit();
             this.SuspendLayout();
@@ -337,7 +339,7 @@
             // btnDeleteProfile
             // 
             this.btnDeleteProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteProfile.Location = new System.Drawing.Point(441, 284);
+            this.btnDeleteProfile.Location = new System.Drawing.Point(277, 284);
             this.btnDeleteProfile.Name = "btnDeleteProfile";
             this.btnDeleteProfile.Size = new System.Drawing.Size(81, 23);
             this.btnDeleteProfile.TabIndex = 33;
@@ -348,9 +350,9 @@
             // pctrPreviewImage
             // 
             this.pctrPreviewImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pctrPreviewImage.Location = new System.Drawing.Point(274, 284);
+            this.pctrPreviewImage.Location = new System.Drawing.Point(535, 214);
             this.pctrPreviewImage.Name = "pctrPreviewImage";
-            this.pctrPreviewImage.Size = new System.Drawing.Size(161, 114);
+            this.pctrPreviewImage.Size = new System.Drawing.Size(297, 183);
             this.pctrPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pctrPreviewImage.TabIndex = 34;
             this.pctrPreviewImage.TabStop = false;
@@ -391,18 +393,38 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(634, 336);
+            this.btnConvert.Location = new System.Drawing.Point(416, 295);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(75, 23);
+            this.btnConvert.Size = new System.Drawing.Size(93, 83);
             this.btnConvert.TabIndex = 0;
-            this.btnConvert.Text = "GoGo";
+            this.btnConvert.Text = "Convert";
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(274, 325);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(81, 23);
+            this.btnImport.TabIndex = 38;
+            this.btnImport.Text = "Import Profiles";
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(273, 365);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(82, 23);
+            this.btnExport.TabIndex = 39;
+            this.btnExport.Text = "Export Profiles";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 441);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.chklstFiles);
             this.Controls.Add(this.btnUncheckAll);
@@ -423,7 +445,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(869, 479);
             this.Name = "Form1";
-            this.Text = "Photo Bomber XL";
+            this.Text = "PhotoBombXL";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctrPreviewImage)).EndInit();
@@ -466,6 +488,8 @@
         private System.Windows.Forms.Button btnSaveProfile;
         private System.Windows.Forms.Button btnEditProfile;
         private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 

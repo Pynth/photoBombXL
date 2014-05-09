@@ -19,6 +19,7 @@ namespace PhotoBombXL
         // these handle the file browsing
         private FolderBrowserDialog folderBrowserDialogInputDestination;
         private FolderBrowserDialog folderBrowserDialogOutputDestination;
+        private OpenFileDialog openFileDialogImport;
 
         private bool isCreating = true;
 
@@ -53,9 +54,13 @@ namespace PhotoBombXL
 
             // init the folder browser dialog
             folderBrowserDialogInputDestination = new FolderBrowserDialog();
+            openFileDialogImport = new OpenFileDialog();
             folderBrowserDialogInputDestination.Description = "Select where your images to be converted are";
             folderBrowserDialogInputDestination.ShowNewFolderButton = false;
-            folderBrowserDialogInputDestination.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures); //use this to set the default folder
+            openFileDialogImport.Title = "Open Text File";
+            openFileDialogImport.Filter = "TXT files|*.txt";
+            openFileDialogImport.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            folderBrowserDialogInputDestination.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             txtSelectDirectory.Text = folderBrowserDialogInputDestination.SelectedPath;
             populateListboxWithImageFiles();
 
@@ -436,6 +441,51 @@ namespace PhotoBombXL
                 txtFileSize.Text = "";
                 cmbFileSize.Enabled = false;
                 txtFileSize.Enabled = false;
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Importing profiles will overwrite your current profiles, are you sure you would like to do this?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                if (openFileDialogImport.ShowDialog() == DialogResult.OK)
+                {
+                    string profiles = openFileDialogImport.FileName;
+
+                    string line = "";
+
+                    try
+                    {
+                        using (StreamReader sr = new StreamReader(profiles))
+                        {
+                            line = sr.ReadToEnd();
+                            Console.WriteLine(line);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error importing file.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    System.IO.File.WriteAllText(Application.UserAppDataPath + "\\ProfileInfo.txt", line);
+                    lstProfile.Items.Clear();
+                    loadProfilesFromFile();
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you'd like to export your profile list?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                System.IO.File.Copy(Application.UserAppDataPath + "\\ProfileInfo.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory) + "\\ProfileInfo.txt");
             }
         }
     }
