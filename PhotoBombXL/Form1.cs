@@ -63,6 +63,7 @@ namespace PhotoBombXL
             folderBrowserDialogInputDestination.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             txtSelectDirectory.Text = folderBrowserDialogInputDestination.SelectedPath;
             populateListboxWithImageFiles();
+            DisableProfile();
 
             folderBrowserDialogOutputDestination = new FolderBrowserDialog();
             folderBrowserDialogOutputDestination.Description = "Select where to save your converted images";
@@ -253,12 +254,19 @@ namespace PhotoBombXL
             {
                 return;
             }
+
             txtProfileName.Text = ((Profile)lstProfile.SelectedItem).name;
             txtHeight.Text = ((Profile)lstProfile.SelectedItem).heightInPixels.ToString();
             cmbFileType.Text = ((Profile)lstProfile.SelectedItem).fileType.ToString();
             txtFileSize.Text = ((Profile)lstProfile.SelectedItem).fileSize.ToString();
             cmbFileSize.Text = ((Profile)lstProfile.SelectedItem).indicator.ToString();
             cmbExifMaintained.Text = ((Profile)lstProfile.SelectedItem).isExifMaintained == true ? "Yes" : "No";
+
+            if (((Profile)lstProfile.SelectedItem).heightInPixels.ToString() == "-1")
+                txtHeight.Text = "";
+            if (((Profile)lstProfile.SelectedItem).fileSize.ToString() == "-1")
+                txtFileSize.Text = "";
+            DisableProfile();
         }
 
         private void btnDeleteProfile_Click(object sender, EventArgs e)
@@ -336,6 +344,11 @@ namespace PhotoBombXL
 
             if (txtHeight.Text == "") txtHeight.Text = "-1";
             if (txtFileSize.Text == "") txtFileSize.Text = "-1";
+            if (txtProfileName.Text == "")
+            {
+                MessageBox.Show("Profile does not currently have a name.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             try
             {
@@ -350,7 +363,7 @@ namespace PhotoBombXL
             if (isCreating == false) lstProfile.Items.Remove(lstProfile.SelectedItem);
             lstProfile.Items.Add(p);
             btnCancelProfile_Click(sender, e);
-
+            DisableProfile();
             saveProfilesToFile();
         }
 
@@ -410,6 +423,12 @@ namespace PhotoBombXL
                 return;
             }
 
+            if (chklstFiles.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("No images selected to be converted.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (txtSaveDirectory.Text == "")
             {
                 MessageBox.Show("Since no directory was selected, a default directory will be used.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -433,14 +452,13 @@ namespace PhotoBombXL
                 txtFileSize.Text = "";
             if ((Profile.fileTypes)cmbFileType.SelectedValue == Profile.fileTypes.JPG)
             {
-                txtFileSize.Enabled = true;
                 cmbFileSize.Enabled = true;
             }
             else
             {
                 txtFileSize.Text = "";
                 cmbFileSize.Enabled = false;
-                txtFileSize.Enabled = false;
+                txtFileSize.ReadOnly = true;
             }
         }
 
@@ -488,5 +506,6 @@ namespace PhotoBombXL
                 System.IO.File.Copy(Application.UserAppDataPath + "\\ProfileInfo.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory) + "\\ProfileInfo.txt");
             }
         }
+
     }
 }

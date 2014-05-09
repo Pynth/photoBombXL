@@ -26,6 +26,15 @@ namespace PhotoBombXL
                 {
                     string extentionlessFilePath = destinationPath + "\\" + profileFolder + "\\" + file.nameWithoutExtension;
                     Image image = Image.FromFile(file.fullPath);
+                    int rotation = GetExifOrienAsInt(image);
+                    if (rotation == 2) image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    else if (rotation == 3) image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    else if (rotation == 4) image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                    else if (rotation == 5) image.RotateFlip(RotateFlipType.Rotate270FlipX);
+                    else if (rotation == 6) image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    else if (rotation == 7) image.RotateFlip(RotateFlipType.Rotate90FlipX);
+                    else if (rotation == 8) image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
                     System.IO.Directory.CreateDirectory(destinationPath + "\\" + profileFolder);
 
                     // resizing the image
@@ -89,6 +98,24 @@ namespace PhotoBombXL
         public static Image resizeImage(Image imageToResize, Size size)
         {
             return (Image)(new Bitmap(imageToResize, size));
+        }
+
+        public static int GetExifOrienAsInt(Image image)
+        {
+            int _orienTag = 0x0112;
+            int orien = 1; // Default to "horizontal (normal)" in case of failure...
+
+            try
+            {
+                byte[] orienBytes = image.PropertyItems.Single(x => x.Id == _orienTag).Value;
+                if (orienBytes.Length > 0)
+                {
+                    orien = (int)orienBytes[0];
+                }
+            }
+            catch { };
+
+            return orien;
         }
 
         public static Size getCorrectSize(Size currentSize, Profile profile)
