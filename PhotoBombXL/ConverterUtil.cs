@@ -79,7 +79,7 @@ namespace PhotoBombXL
 
                             if (saveQuality == -1)
                             {
-                                MessageBox.Show("Unable to meet file size requirements for image: " + file + " , file has been reduced as small as possible.");
+                                MessageBox.Show("Unable to meet file size requirements for image: " + file.fileName + " , file has been reduced as small as possible.");
                                 saveQuality = 0;
                             }
                             EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, saveQuality);
