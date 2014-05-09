@@ -155,9 +155,9 @@
             this.lblExifMaintained.AutoSize = true;
             this.lblExifMaintained.Location = new System.Drawing.Point(7, 134);
             this.lblExifMaintained.Name = "lblExifMaintained";
-            this.lblExifMaintained.Size = new System.Drawing.Size(76, 13);
+            this.lblExifMaintained.Size = new System.Drawing.Size(102, 13);
             this.lblExifMaintained.TabIndex = 18;
-            this.lblExifMaintained.Text = "ExifMaintained";
+            this.lblExifMaintained.Text = "Rotation Maintained";
             // 
             // label1
             // 
@@ -340,7 +340,7 @@
             // btnDeleteProfile
             // 
             this.btnDeleteProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteProfile.Location = new System.Drawing.Point(277, 284);
+            this.btnDeleteProfile.Location = new System.Drawing.Point(273, 284);
             this.btnDeleteProfile.Name = "btnDeleteProfile";
             this.btnDeleteProfile.Size = new System.Drawing.Size(81, 23);
             this.btnDeleteProfile.TabIndex = 33;
@@ -351,7 +351,7 @@
             // pctrPreviewImage
             // 
             this.pctrPreviewImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pctrPreviewImage.Location = new System.Drawing.Point(535, 214);
+            this.pctrPreviewImage.Location = new System.Drawing.Point(544, 214);
             this.pctrPreviewImage.Name = "pctrPreviewImage";
             this.pctrPreviewImage.Size = new System.Drawing.Size(297, 183);
             this.pctrPreviewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -394,6 +394,7 @@
             // 
             // btnConvert
             // 
+            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConvert.Location = new System.Drawing.Point(416, 295);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(93, 83);
@@ -403,6 +404,7 @@
             // 
             // btnImport
             // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.Location = new System.Drawing.Point(274, 325);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(81, 23);
@@ -412,6 +414,7 @@
             // 
             // btnExport
             // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Location = new System.Drawing.Point(273, 365);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(82, 23);
