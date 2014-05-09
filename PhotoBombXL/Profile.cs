@@ -32,7 +32,7 @@ namespace PhotoBombXL
         public int heightInPixels { get; set; }
         public int widthInPixels { get; set; }
         public fileTypes fileType { get; set; }
-        public int fileSize { get; set; }
+        public double fileSize { get; set; }
         public fileSizeIndicator indicator { get; set; } 
         public int aspectHeight { get; set; }
         public int aspectWidth { get; set; }

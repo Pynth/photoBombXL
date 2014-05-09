@@ -19,7 +19,7 @@ namespace PhotoBombXL
         long jL, mid;
         EncoderParameters encoderParams = new EncoderParameters(1);
 
-        private long sizeToQuality(Bitmap img, int maxsizebytes, long lower, long upper)
+        public long sizeToQuality(Bitmap img, int maxsizebytes, long lower, long upper)
         {
             ImageCodecInfo jpegCodec = GetEncoder(ImageFormat.Jpeg);
 
@@ -46,7 +46,7 @@ namespace PhotoBombXL
             else
                 return (jL <= maxsizebytes) ? sizeToQuality(img, maxsizebytes, mid + 1, upper) : sizeToQuality(img, maxsizebytes, lower, mid);
         }
-        private static ImageCodecInfo GetEncoder(ImageFormat format)
+        public ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
 
