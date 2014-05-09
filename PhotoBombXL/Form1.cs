@@ -96,7 +96,7 @@ namespace PhotoBombXL
                 int heightInPixels = Convert.ToInt32(profileData[i + 1]);
                 int widthInPixels = Convert.ToInt32(profileData[i + 2]);
                 Profile.fileTypes fileType = (Profile.fileTypes)Enum.Parse(typeof(Profile.fileTypes), profileData[i + 3]);
-                int fileSize = Convert.ToInt32(profileData[i + 4]);
+                double fileSize = Convert.ToDouble(profileData[i + 4]);
                 Profile.fileSizeIndicator indicator = (Profile.fileSizeIndicator)Enum.Parse(typeof(Profile.fileSizeIndicator), profileData[i + 5]);
                 int aspectHeight = Convert.ToInt32(profileData[i + 6]);
                 int aspectWidth = Convert.ToInt32(profileData[i + 7]);
