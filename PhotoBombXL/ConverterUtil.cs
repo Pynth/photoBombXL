@@ -45,10 +45,32 @@ namespace PhotoBombXL
                     }
                     else if (usedProfile.fileType == Profile.fileTypes.JPG)
                     {
-                        JPEGQuality qualityChanger = new JPEGQuality();
-                        //long saveQuality = qualityChanger.sizeToQuality(image, usedProfile.fileSize, 0, 100);
+                        // we need to get the file size in bytes from our profile, which is saved as mB or kB
+                        // we use rounded off versions of mB and kB
+                        int maxFileSize = (int) (usedProfile.indicator == Profile.fileSizeIndicator.kb ? usedProfile.fileSize * 1000 : usedProfile.fileSize * 10000);
 
-                        image.Save(extentionlessFilePath + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                        Bitmap bmp = new Bitmap(image);
+                        JPEGQuality qualityChanger = new JPEGQuality();
+                        ImageCodecInfo jgpEncoder = qualityChanger.GetEncoder(ImageFormat.Jpeg);
+                        System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+                        // this will detirmine the quality indicator (0 to 100 I think) to get the image below
+                        // our specified size
+                        // it will return -1 if it can't be reduced to the requested fileSize
+                        long saveQuality = qualityChanger.sizeToQuality(bmp, maxFileSize, 0, 100);
+
+                        EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                        if (saveQuality == -1)
+                        {
+                            MessageBox.Show("Unable to reduce jpeg quality");
+                            saveQuality = 0;
+                        }
+                        EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, saveQuality);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+
+                        bmp.Save(extentionlessFilePath + ".jpg", jgpEncoder, myEncoderParameters);
+
                     }
                     else if (usedProfile.fileType == Profile.fileTypes.PNG)
                     {
