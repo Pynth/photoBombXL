@@ -63,7 +63,6 @@
             this.btnConvert = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
-            this.btn_help = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctrPreviewImage)).BeginInit();
             this.SuspendLayout();
@@ -422,22 +421,11 @@
             this.btnExport.Text = "Export Profiles";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // btn_help
-            // 
-            this.btn_help.Location = new System.Drawing.Point(156, 3);
-            this.btn_help.Name = "btn_help";
-            this.btn_help.Size = new System.Drawing.Size(75, 23);
-            this.btn_help.TabIndex = 40;
-            this.btn_help.Text = "help";
-            this.btn_help.UseVisualStyleBackColor = true;
-            this.btn_help.Click += new System.EventHandler(this.btn_help_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 441);
-            this.Controls.Add(this.btn_help);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnConvert);
@@ -505,7 +493,6 @@
         private System.Windows.Forms.Button btnConvert;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btn_help;
     }
 }
 

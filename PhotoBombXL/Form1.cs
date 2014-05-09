@@ -538,10 +538,5 @@ namespace PhotoBombXL
                 System.IO.File.Copy(Application.UserAppDataPath + "\\ProfileInfo.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory) + "\\ProfileInfo.txt");
             }
         }
-
-        private void btn_help_Click(object sender, EventArgs e)
-        {
-            Help.ShowHelp(this, "help.html");
-        }
     }
 }
