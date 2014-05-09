@@ -7,6 +7,7 @@ namespace PhotoBombXL
 {
     class Profile
     {
+        // enum to be used in file type selection
         public enum fileTypes
         {
             JPG,
@@ -16,18 +17,21 @@ namespace PhotoBombXL
             TIFF
         };
 
+        // enum to be used in the rotation of photo gained from exif
         public enum exifMaintained
         {
             Yes,
             No
         }
 
+        // enum to be used to determine the file size
         public enum fileSizeIndicator
         {
             mb,
             kb
         }
 
+        // variables for the profile
         public string name { get; set; }
         public int heightInPixels { get; set; }
         public int widthInPixels { get; set; }
@@ -38,6 +42,7 @@ namespace PhotoBombXL
         public int aspectWidth { get; set; }
         public bool isExifMaintained { get; set; }
 
+        // profile contstructor
         public Profile(String name, int heightInPixels, int widthInPixels, fileTypes fileType, double fileSize, fileSizeIndicator fsi,int aspectHeight, int aspectWidth, bool isExifMaintained)
         {
             this.name = name;

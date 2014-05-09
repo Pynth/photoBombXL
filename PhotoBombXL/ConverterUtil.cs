@@ -37,7 +37,7 @@ namespace PhotoBombXL
 
                     System.IO.Directory.CreateDirectory(destinationPath + "\\" + profileFolder);
 
-                    // resizing the image
+                    // resizing the image if it is larger than the given size
                     Size adjustedSize = image.Size;
                     if ((image.Size.Height > usedProfile.heightInPixels || image.Size.Width > usedProfile.heightInPixels)&&(usedProfile.heightInPixels != -1))
                     {
@@ -129,11 +129,13 @@ namespace PhotoBombXL
             return (Image)(new Bitmap(imageToResize, size));
         }
 
+        // used to get orientation of image out of the 
         public static int GetExifOrienAsInt(Image image)
         {
             int _orienTag = 0x0112;
             int orien = 1; // Default to "horizontal (normal)" in case of failure...
 
+            // error checking for image orientation
             try
             {
                 byte[] orienBytes = image.PropertyItems.Single(x => x.Id == _orienTag).Value;
@@ -147,6 +149,7 @@ namespace PhotoBombXL
             return orien;
         }
 
+        // resizes the image if it is larger than the maximum given size
         public static Size getCorrectSize(Size currentSize, Profile profile)
         {
             double ratio;

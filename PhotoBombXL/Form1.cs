@@ -20,6 +20,7 @@ namespace PhotoBombXL
         private FolderBrowserDialog folderBrowserDialogOutputDestination;
         private OpenFileDialog openFileDialogImport;
 
+        // global boolean managing if we are currently creating a profile
         private bool isCreating = true;
 
         public Form1()
@@ -51,7 +52,7 @@ namespace PhotoBombXL
 
             chkDefaultSave.Checked = true;
 
-            // init the folder browser dialog
+            // init the folder and file browser dialog
             folderBrowserDialogInputDestination = new FolderBrowserDialog();
             openFileDialogImport = new OpenFileDialog();
             folderBrowserDialogInputDestination.Description = "Select where your images to be converted are";
@@ -61,14 +62,17 @@ namespace PhotoBombXL
             openFileDialogImport.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             folderBrowserDialogInputDestination.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             txtSelectDirectory.Text = folderBrowserDialogInputDestination.SelectedPath;
+
+            // populate listbox with images from inital folder
             populateListboxWithImageFiles();
+            
+            // disable profile gui initially
             DisableProfile();
 
+            // more folder initiateion
             folderBrowserDialogOutputDestination = new FolderBrowserDialog();
             folderBrowserDialogOutputDestination.Description = "Select where to save your converted images";
             folderBrowserDialogOutputDestination.ShowNewFolderButton = true;
-            //folderBrowserDialogOutputDestination.SelectedPath = use this to set the default folder, i don't know what to put here
-            //txtSaveDirectory.Text = folderBrowserDialogOutputDestination.SelectedPath;
         }
 
         // this populates the list box with profiles from the txt file
@@ -234,14 +238,19 @@ namespace PhotoBombXL
             cmbFileType.Enabled = false;
         }
 
+        // forces the saved files to go to a default location based on thier original location if checked
+        // allows user to specify their own location if unchecked
         private void chkDefaultSave_CheckedChanged(object sender, EventArgs e)
         {
+            // default location
             if (chkDefaultSave.Checked == true)
             {
                 btnBrowseSave.Enabled = false;
                 txtSaveDirectory.Enabled = false;
                 txtSaveDirectory.Text = txtSelectDirectory.Text;
             }
+
+            // maunal location
             else
             {
                 btnBrowseSave.Enabled = true;
@@ -250,13 +259,17 @@ namespace PhotoBombXL
             }
         }
 
+        // does various things when selected profile changes
         private void lstProfileList_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            // returns if nothing is selected
             if (lstProfile.SelectedItem == null)
             {
                 return;
             }
 
+            // fills out profile information area with profile information
             txtProfileName.Text = ((Profile)lstProfile.SelectedItem).name;
             txtHeight.Text = ((Profile)lstProfile.SelectedItem).heightInPixels.ToString();
             cmbFileType.Text = ((Profile)lstProfile.SelectedItem).fileType.ToString();
@@ -264,13 +277,18 @@ namespace PhotoBombXL
             cmbFileSize.Text = ((Profile)lstProfile.SelectedItem).indicator.ToString();
             cmbExifMaintained.Text = ((Profile)lstProfile.SelectedItem).isExifMaintained == true ? "Yes" : "No";
 
+
+            // removes the placeholder for a empty piece and adds a true blank to be displayed for the user
             if (((Profile)lstProfile.SelectedItem).heightInPixels.ToString() == "-1")
                 txtHeight.Text = "";
             if (((Profile)lstProfile.SelectedItem).fileSize.ToString() == "-1")
                 txtFileSize.Text = "";
+
+            // redisable profiles if they happened to get running somehow
             DisableProfile();
         }
 
+        //  completely removes slected profile after the user confirms their action
         private void btnDeleteProfile_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Are you sure you'd like to delete the select profile?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -288,6 +306,7 @@ namespace PhotoBombXL
             saveProfilesToFile();
         }
 
+        // allows the selection of of the picture selection directory
         private void btnBrowseSelect_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialogInputDestination.ShowDialog() == DialogResult.OK)
@@ -299,6 +318,7 @@ namespace PhotoBombXL
             }
         }
 
+        // allows the selection of the picture save directory
         private void btnBrowseSave_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialogOutputDestination.ShowDialog() == DialogResult.OK)
@@ -307,6 +327,7 @@ namespace PhotoBombXL
             }
         }
 
+        // sets up the selected image in the picture box
         private void chklstFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -319,36 +340,44 @@ namespace PhotoBombXL
             }
         }
 
+        // checks all images in check list box
         private void btnCheckAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < chklstFiles.Items.Count; i++)
                 chklstFiles.SetItemChecked(i, true);
         }
 
+        // unchecks all images in check list box
         private void btnUncheckAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < chklstFiles.Items.Count; i++)
                 chklstFiles.SetItemChecked(i, false);
         }
 
+        // saves the new profile to the listbox of profiles
         private void btnSaveProfile_Click(object sender, EventArgs e)
         {
+            // finalizes the combobox info from the profile info
             Profile.fileTypes fileType = (Profile.fileTypes)Enum.Parse(typeof(Profile.fileTypes), cmbFileType.Text);
             Profile.exifMaintained exifMaintained = (Profile.exifMaintained)Enum.Parse(typeof(Profile.exifMaintained), cmbExifMaintained.Text);
             Profile.fileSizeIndicator indicator = (Profile.fileSizeIndicator)Enum.Parse(typeof(Profile.fileSizeIndicator), cmbFileSize.Text);
 
+            // finalizes bool of exif rotation maintaining 
             bool isExifMaintained = exifMaintained == Profile.exifMaintained.Yes ? true : false;
 
             Profile p;
 
+            // checks whether the profile was given a name
             if (txtProfileName.Text == "")
             {
                 MessageBox.Show("Profile does not currently have a name.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
+            // trys to convert height to a number and catches the error
             try
             {
+                // checks if the height is smaller than one
                 if (Convert.ToInt32(txtHeight.Text) < 1)
                 {
                     MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -361,44 +390,57 @@ namespace PhotoBombXL
                 
             }
 
+            // trys to convert file size to a number and catches the error
             try
             {
-            if (Convert.ToDouble(txtFileSize.Text) <= 0)
-                {
-                    MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                // checks if the file size is smaller or equal to 0
+                if (Convert.ToDouble(txtFileSize.Text) <= 0)
+                    {
+                        MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
             }
             catch (Exception)
             {
                 
             }
 
+            // sets blank information to the place holder '-1'
             if (txtHeight.Text == "") txtHeight.Text = "-1";
             if (txtFileSize.Text == "") txtFileSize.Text = "-1";
 
+            // try to create the profile, if errors occur it will not be created
             try
             {
                 p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), 1, fileType, Convert.ToDouble(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
             }
             catch (Exception)
             {
+                // blanks out potentially invalid boxes and displays error message
                 txtHeight.Text = "";
                 txtFileSize.Text = "";
                 MessageBox.Show("A field is currently invalid. The profile has not been created.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
+            // removes old profile from listbox and adds the new one
             if (isCreating == false) lstProfile.Items.Remove(lstProfile.SelectedItem);
             lstProfile.Items.Add(p);
+
+            // uses functionallity within the cancel profile
             btnCancelProfile_Click(sender, e);
+
+            //disables gui after we are done with it
             DisableProfile();
             btnConvert.Enabled = true;
             btnDeleteProfile.Enabled = true;
             lstProfile.Enabled = true;
+
+            // saves profiles to file
             saveProfilesToFile();
         }
 
+        // re enabels all gui and sorts profile list
         private void btnCancelProfile_Click(object sender, EventArgs e)
         {
             btnConvert.Enabled = true;
@@ -414,6 +456,7 @@ namespace PhotoBombXL
             SelectTop();
         }
 
+        // sorts the profile list
         private void SortList()
         {
             List<Profile> list = lstProfile.Items.Cast<Profile>().ToList();
@@ -422,6 +465,7 @@ namespace PhotoBombXL
             lstProfile.Items.AddRange(sortedList.ToArray());
         }
 
+        // selects the top profile of the listbox
         private void SelectTop()
         {
             try
@@ -434,6 +478,8 @@ namespace PhotoBombXL
             }
         }
 
+        // sets the gui in a way that editing of profiles can be done
+        // this includes hiding create and edit buttons and exposing the save and cancel ones
         private void btnEditProfile_Click(object sender, EventArgs e)
         {
             btnConvert.Enabled = false;
@@ -447,31 +493,39 @@ namespace PhotoBombXL
             btnCancelProfile.Visible = true;
         }
 
+        // converts images
         private void btnConvert_Click(object sender, EventArgs e)
         {
+            // ensures there are files to convert
             if (chklstFiles.Items.Count == 0)
             {
                 MessageBox.Show("No images to convert", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // ensures there are files checked to convert
             if (chklstFiles.CheckedItems.Count == 0)
             {
                 MessageBox.Show("No images selected to be converted.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // ensures that their is a directory selected
             if (txtSaveDirectory.Text == "")
             {
                 MessageBox.Show("Since no directory was selected, a default directory will be used.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 chkDefaultSave.Checked = true;
             }
 
+            // starts up the work horse that is the convterUtil class
             ConverterUtil.convertFiles(chklstFiles.CheckedItems.Cast<ImageFilePathUtil>().ToList(), (Profile)lstProfile.SelectedItem, txtSaveDirectory.Text, prgProgressBar);
+
+            // shows a message that the conversion is complete
             MessageBox.Show("Conversion Complete");
             prgProgressBar.Value = 0;
         }
 
+        // populates list box when the directory has been changed
         private void txtSelectDirectory_TextChanged(object sender, EventArgs e)
         {
             chkDefaultSave_CheckedChanged(sender, e);
@@ -479,6 +533,7 @@ namespace PhotoBombXL
             populateListboxWithImageFiles();
         }
 
+        // changes whether the file size information should be available based on wether we are working with a jpg
         private void cmbFileType_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtFileSize.Text = "";
@@ -494,17 +549,21 @@ namespace PhotoBombXL
             }
         }
 
+        // imports profile save file
         private void btnImport_Click(object sender, EventArgs e)
         {
+            // ensures the user wants to overwrite their file
             DialogResult dr = MessageBox.Show("Importing profiles will overwrite your current profiles, are you sure you would like to do this?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dr == DialogResult.Yes)
             {
+                // allows you to select your file
                 if (openFileDialogImport.ShowDialog() == DialogResult.OK)
                 {
                     string profiles = openFileDialogImport.FileName;
 
                     string line = "";
 
+                    // ensures the file is valid
                     try
                     {
                         using (StreamReader sr = new StreamReader(profiles))
@@ -515,23 +574,29 @@ namespace PhotoBombXL
                     }
                     catch (Exception)
                     {
+                        // catches error in impotation
                         MessageBox.Show("Error importing file.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
+                    // saves new file 
                     System.IO.File.WriteAllText(Application.UserAppDataPath + "\\ProfileInfo.txt", line);
                     lstProfile.Items.Clear();
                     loadProfilesFromFile();
                 }
             }
+
+            // returns if the user gets colder feet than a bride at the alter
             else
             {
                 return;
             }
         }
 
+        // exports the profile save
         private void btnExport_Click(object sender, EventArgs e)
         {
+            // ensures they want to export the file
             DialogResult dr = MessageBox.Show("Are you sure you would like to export your profile list?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dr == DialogResult.Yes)
             {
