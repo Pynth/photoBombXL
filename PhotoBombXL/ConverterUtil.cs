@@ -30,7 +30,7 @@ namespace PhotoBombXL
 
                     // resizing the image
                     Size adjustedSize = image.Size;
-                    if (image.Size.Height > usedProfile.heightInPixels || image.Size.Width > usedProfile.heightInPixels)
+                    if ((image.Size.Height > usedProfile.heightInPixels || image.Size.Width > usedProfile.heightInPixels)&&(usedProfile.heightInPixels != -1))
                     {
                         adjustedSize = getCorrectSize(image.Size, usedProfile);
                     }
@@ -47,7 +47,7 @@ namespace PhotoBombXL
                     {
                         // we need to get the file size in bytes from our profile, which is saved as mB or kB
                         // we use rounded off versions of mB and kB
-                        int maxFileSize = (int) (usedProfile.indicator == Profile.fileSizeIndicator.kb ? usedProfile.fileSize * 1000 : usedProfile.fileSize * 10000);
+                        int maxFileSize = (int) (usedProfile.indicator == Profile.fileSizeIndicator.kb ? usedProfile.fileSize * 1000 : usedProfile.fileSize * 1000000);
 
                         Bitmap bmp = new Bitmap(image);
                         JPEGQuality qualityChanger = new JPEGQuality();
