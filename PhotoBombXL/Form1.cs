@@ -214,11 +214,14 @@ namespace PhotoBombXL
 
         private void EnableProfile()
         {
+            if ((Profile.fileTypes)cmbFileType.SelectedValue == Profile.fileTypes.JPG)
+            {
+                txtFileSize.ReadOnly = false;
+                cmbFileSize.Enabled = true;
+            }
             txtProfileName.ReadOnly = false;
             txtHeight.ReadOnly = false;
-            txtFileSize.ReadOnly = false;
             cmbExifMaintained.Enabled = true;
-            cmbFileSize.Enabled = true;
             cmbFileType.Enabled = true;
         }
 
@@ -331,9 +334,6 @@ namespace PhotoBombXL
 
         private void btnSaveProfile_Click(object sender, EventArgs e)
         {
-            btnConvert.Enabled = true;
-            btnDeleteProfile.Enabled = true;
-            lstProfile.Enabled = true;
             Profile.fileTypes fileType = (Profile.fileTypes)Enum.Parse(typeof(Profile.fileTypes), cmbFileType.Text);
             Profile.exifMaintained exifMaintained = (Profile.exifMaintained)Enum.Parse(typeof(Profile.exifMaintained), cmbExifMaintained.Text);
             Profile.fileSizeIndicator indicator = (Profile.fileSizeIndicator)Enum.Parse(typeof(Profile.fileSizeIndicator), cmbFileSize.Text);
@@ -356,12 +356,19 @@ namespace PhotoBombXL
                     return;
                 }
 
-                if (Convert.ToDouble(txtFileSize.Text) <= 0)
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            try
+            {
+            if (Convert.ToDouble(txtFileSize.Text) <= 0)
                 {
                     MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
             }
             catch (Exception)
             {
@@ -373,10 +380,12 @@ namespace PhotoBombXL
 
             try
             {
-                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), 1, fileType, Convert.ToInt32(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
+                p = new Profile(txtProfileName.Text, Convert.ToInt32(txtHeight.Text), 1, fileType, Convert.ToDouble(txtFileSize.Text), indicator, 0, 0, isExifMaintained);
             }
             catch (Exception)
             {
+                txtHeight.Text = "";
+                txtFileSize.Text = "";
                 MessageBox.Show("A field is currently invalid. The profile has not been created.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -385,6 +394,9 @@ namespace PhotoBombXL
             lstProfile.Items.Add(p);
             btnCancelProfile_Click(sender, e);
             DisableProfile();
+            btnConvert.Enabled = true;
+            btnDeleteProfile.Enabled = true;
+            lstProfile.Enabled = true;
             saveProfilesToFile();
         }
 
@@ -470,14 +482,14 @@ namespace PhotoBombXL
 
         private void cmbFileType_SelectedIndexChanged(object sender, EventArgs e)
         {
-                txtFileSize.Text = "";
+            txtFileSize.Text = "";
             if ((Profile.fileTypes)cmbFileType.SelectedValue == Profile.fileTypes.JPG)
             {
+                txtFileSize.ReadOnly = false;
                 cmbFileSize.Enabled = true;
             }
             else
             {
-                txtFileSize.Text = "";
                 cmbFileSize.Enabled = false;
                 txtFileSize.ReadOnly = true;
             }
