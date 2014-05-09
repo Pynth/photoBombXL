@@ -342,13 +342,34 @@ namespace PhotoBombXL
 
             Profile p;
 
-            if (txtHeight.Text == "") txtHeight.Text = "-1";
-            if (txtFileSize.Text == "") txtFileSize.Text = "-1";
             if (txtProfileName.Text == "")
             {
                 MessageBox.Show("Profile does not currently have a name.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
+            try
+            {
+                if (Convert.ToInt32(txtHeight.Text) < 1)
+                {
+                    MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (Convert.ToDouble(txtFileSize.Text) <= 0)
+                {
+                    MessageBox.Show("Values smaller than one cannot be used.", "Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            if (txtHeight.Text == "") txtHeight.Text = "-1";
+            if (txtFileSize.Text == "") txtFileSize.Text = "-1";
 
             try
             {
@@ -500,7 +521,7 @@ namespace PhotoBombXL
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you'd like to export your profile list?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult dr = MessageBox.Show("Are you sure you would like to export your profile list?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dr == DialogResult.Yes)
             {
                 System.IO.File.Copy(Application.UserAppDataPath + "\\ProfileInfo.txt", System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory) + "\\ProfileInfo.txt");
